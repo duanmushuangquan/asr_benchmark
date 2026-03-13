@@ -1,0 +1,11 @@
+model:
+  name: sherpa_mock
+  model_id: sherpa_mock_streaming_zipformer_v1
+  backend: sherpa_onnx_streaming
+  device: cpu
+  chunk_seconds: 0.12
+  model_files:
+    tokens: models/sherpa/tokens.txt
+    encoder: models/sherpa/encoder.int8.onnx
+    decoder: models/sherpa/decoder.int8.onnx
+    joiner: models/sherpa/joiner.int8.onnx

@@ -1,0 +1,7 @@
+_base:
+  - ../datasets/default_dataset.yaml
+  - ../eval/default_eval.yaml
+  - ../models/funasr_mock.yaml
+run_name: demo_funasr_pipeline
+output:
+  dir: ../../outputs/demo_run

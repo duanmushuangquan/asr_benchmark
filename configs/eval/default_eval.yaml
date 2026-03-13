@@ -1,0 +1,8 @@
+decode:
+  language: zh
+  hotwords_yaml: ../hotwords.yaml
+  hotwords: []
+normalizer:
+  to_lower: true
+  remove_punctuation: true
+  strip_spaces: true

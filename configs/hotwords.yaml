@@ -1,0 +1,11 @@
+hotwords:
+- xiaofu
+- assistant
+- 小傅小傅
+sherpa_fst:
+- name: xiaofu
+  pinyin: xiao3fu4
+- name: assistant
+  pinyin: a4si1si1tan4te4
+- name: 小傅小傅
+  pinyin: pending

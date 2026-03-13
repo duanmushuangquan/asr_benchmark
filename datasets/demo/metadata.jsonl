@@ -1,0 +1,5 @@
+{"sample_id":"demo_0001","audio_path":"audio/demo_0001.wav","text":"xiaofu xiaofu hello assistant","scenario":"wake_word","language":"en","device":"usb_mic","noise":"quiet"}
+{"sample_id":"demo_0002","audio_path":"audio/demo_0002.wav","text":"play music volume up","scenario":"command","language":"en","device":"mac_mic","noise":"office"}
+{"sample_id":"demo_0003","audio_path":"audio/demo_0003.wav","text":"today weather is good","scenario":"daily_chat","language":"en","device":"orin_array","noise":"high_noise"}
+{"sample_id": "smp_1773383138_103", "audio_path": "audio/smp_1773383138_103.wav", "text": "啊啊啊啊啊啊", "timestamp": 1773383138, "language": "zh", "hotword": "xiaofu", "task_scene": "grasp", "speaker_type": "single", "speech_style": "normal", "device": "web_virtual_mic", "distance": "near", "noise": "quiet", "dataset_name": "demo"}
+{"sample_id": "smp_1773383866_456", "audio_path": "audio/smp_1773383866_456.wav", "text": "sfasfd", "timestamp": 1773383866, "language": "zh", "hotword": "no", "task_scene": "grasp", "speaker_type": "single", "speech_style": "normal", "device": "web_virtual_mic", "distance": "near", "noise": "quiet", "dataset_name": "demo"}

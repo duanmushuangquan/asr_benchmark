@@ -1,0 +1,7 @@
+_base:
+  - ../datasets/default_dataset.yaml
+  - ../eval/default_eval.yaml
+  - ../models/sherpa_mock.yaml
+run_name: demo_sherpa_pipeline
+output:
+  dir: ../../outputs/demo_sherpa_run

@@ -1,0 +1,20 @@
+{
+  "run_name": "web_run_demo",
+  "dataset_id": "demo",
+  "model_id": "funasr_mock_paraformer_v1",
+  "total_samples": 5,
+  "succeeded_samples": 5,
+  "failed_samples": 0,
+  "aggregate_metrics": {
+    "wer": 0.21666666666666667,
+    "cer": 0.13056812468577172,
+    "avg_latency_sec": 0.10342,
+    "p50_latency_sec": 0.1121,
+    "p90_latency_sec": 0.12994
+  },
+  "capabilities": {
+    "streaming": false,
+    "supports_hotwords": true,
+    "supports_first_token_latency": false
+  }
+}

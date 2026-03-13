@@ -1,0 +1,7 @@
+_base: demo_funasr_run.yaml
+dataset:
+  dataset_id: demo_web
+  metadata_path: ../../datasets/demo_web/metadata.jsonl
+run_name: web_run_demo_web
+output:
+  dir: ../../outputs/web_runs/demo_funasr_run/demo_web

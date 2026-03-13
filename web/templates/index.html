@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASR V2 Framework Demo</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --text: #1b2533;
+      --muted: #4f6177;
+      --primary: #1e7dd7;
+      --border: #dbe4ef;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background: linear-gradient(160deg, #e9f2ff 0%, #f8fbff 60%, #f3f6fb 100%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 12px 24px rgba(30, 68, 112, 0.08);
+      margin-bottom: 16px;
+    }
+    h1, h2 { margin: 0 0 10px; }
+    p { margin: 0 0 8px; color: var(--muted); }
+    label { display: block; font-weight: 600; margin-bottom: 8px; }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+    button {
+      margin-top: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .status {
+      margin-top: 10px;
+      font-size: 13px;
+      white-space: pre-wrap;
+      color: var(--muted);
+    }
+    ul { margin: 8px 0 0; padding-left: 18px; }
+    code {
+      background: #eef4fb;
+      padding: 1px 6px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>ASR Benchmark V2 - Web Flow Viewer</h1>
+      <p>Run the scaffold pipeline from a web page and inspect detailed trace prints in the server terminal.</p>
+      <p>The trace format is <code>[TRACE][file:line][function] purpose=...</code>, so each step maps to source code quickly.</p>
+    </div>
+
+    <div class="card">
+      <h2>Run Evaluation</h2>
+      <label for="configSelect">Select Config</label>
+      <select id="configSelect">
+        {% for cfg in configs %}
+        <option value="{{ cfg }}">{{ cfg }}</option>
+        {% endfor %}
+      </select>
+      <button id="runBtn">Run Pipeline</button>
+      <div id="status" class="status">Idle.</div>
+    </div>
+
+    <div class="card">
+      <h2>Architecture Notes</h2>
+      <ul>
+        <li><code>models/base.py</code>: unified model contract, evaluator does not care backend type.</li>
+        <li><code>models/registry.py</code>: add new model by registration, not pipeline branching.</li>
+        <li><code>pipeline.py</code>: single orchestration entry for CLI and web.</li>
+        <li><code>contracts.py</code>: stable data objects between layers.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Recent Run Summaries</h2>
+      {% if summaries %}
+      <ul>
+        {% for s in summaries %}
+        <li><code>{{ s }}</code></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No summary generated yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    const runBtn = document.getElementById("runBtn");
+    const statusNode = document.getElementById("status");
+    const configSelect = document.getElementById("configSelect");
+
+    runBtn.addEventListener("click", async () => {
+      const cfg = configSelect.value;
+      statusNode.textContent = "Running pipeline...";
+      runBtn.disabled = true;
+      try {
+        const body = new FormData();
+        body.append("config_path", cfg);
+        const resp = await fetch("/run", { method: "POST", body });
+        const data = await resp.json();
+        if (data.success) {
+          statusNode.textContent = "Done.\n" + JSON.stringify(data.summary, null, 2);
+        } else {
+          statusNode.textContent = "Failed:\n" + data.error;
+        }
+      } catch (err) {
+        statusNode.textContent = "Network error:\n" + err;
+      } finally {
+        runBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

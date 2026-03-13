@@ -1,0 +1,8 @@
+model:
+  name: funasr_mock
+  model_id: funasr_mock_paraformer_v1
+  backend: funasr_onnx_offline
+  model_dir: models/funasr/paraformer-zh
+  device: cpu
+  batch_size: 1
+  quantize: true
